@@ -1,0 +1,27 @@
+USE mavenfuzzyfactory;
+
+-- MONTHLY GSEARCH SESSIONS AND ORDERS
+SELECT
+	YEAR(website_sessions.created_at) AS yr,
+    CASE 
+		WHEN MONTH(website_sessions.created_at) = 3 THEN 'march'
+		WHEN MONTH(website_sessions.created_at) = 4 THEN 'april'
+		WHEN MONTH(website_sessions.created_at) = 5 THEN 'may'
+		WHEN MONTH(website_sessions.created_at) = 6 THEN 'june'
+		WHEN MONTH(website_sessions.created_at) = 7 THEN 'july'
+		WHEN MONTH(website_sessions.created_at) = 8 THEN 'august'
+		WHEN MONTH(website_sessions.created_at) = 9 THEN 'september'
+		WHEN MONTH(website_sessions.created_at) = 10 THEN 'october'
+		WHEN MONTH(website_sessions.created_at) = 11 THEN 'november'
+		WHEN MONTH(website_sessions.created_at) = 12 THEN 'december'
+	END AS month_name,
+    COUNT(DISTINCT website_sessions.website_session_id) AS sessions,
+    COUNT(DISTINCT orders.order_id) AS orders,
+    COUNT(DISTINCT orders.order_id)/  COUNT(DISTINCT website_sessions.website_session_id) AS conv_rate
+FROM website_sessions
+	LEFT JOIN orders
+		ON orders.website_session_id = website_sessions.website_session_id
+WHERE website_sessions.created_at < '2012-11-27'
+	AND website_sessions.utm_source = 'gsearch'
+GROUP BY 1,2;
+
