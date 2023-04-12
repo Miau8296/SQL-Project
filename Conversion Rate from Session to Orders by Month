@@ -1,6 +1,4 @@
 USE mavenfuzzyfactory;
-
--- MONTHLY GSEARCH SESSIONS AND ORDERS
 SELECT
 	YEAR(website_sessions.created_at) AS yr,
     CASE 
