@@ -1,6 +1,4 @@
-
 USE mavenfuzzyfactory;
-
 SELECT
 	YEAR(website_sessions.created_at) AS yr,
      	CASE 
