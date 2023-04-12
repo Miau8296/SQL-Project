@@ -1,0 +1,12 @@
+USE mavenfuzzyfactory;
+
+SELECT
+	primary_product_id,
+	COUNT(order_id) AS orders,
+    sum(price_usd) AS revenue,
+    sum(price_usd- cogs_usd) AS margin,
+    AVG(price_usd) AS average_order_value
+FROM orders
+WHERE order_id BETWEEN 10000 AND 11000
+GROUP BY 1
+ORDER BY 2 DESC;
