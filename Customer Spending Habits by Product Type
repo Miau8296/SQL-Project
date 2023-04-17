@@ -1,0 +1,14 @@
+USE customerdata;
+
+SELECT *
+FROM customer_spending_habits;
+
+SELECT
+	Sub_Category AS Product_Type,
+    COUNT(Product_Category) AS total_orders,
+    SUM(Cost) AS total_cost_of_product,
+    SUM(Revenue) AS total_revenue,
+    SUM(Revenue)- SUM(Cost) AS total_profit
+	FROM customer_spending_habits
+    GROUP BY 1
+    ORDER BY total_orders DESC;
